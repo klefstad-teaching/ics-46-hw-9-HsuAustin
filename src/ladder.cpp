@@ -6,6 +6,7 @@
 #include <vector>
 #include <set>
 #include <stdexcept>
+#include <cctype>
 
 using namespace std;
 
@@ -70,4 +71,15 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         }
     }
     return {};
+}
+
+void load_words(set<string> & word_list, const string& file_name) {
+    ifstream infile(file_name);
+    if (!infile.is_open()) {cerr << "Cannot open file" << endl;}
+    string word;
+    while (infile >> word) {
+        for (auto &ch: word) {ch = tolower(ch);}
+        word_list.insert(word);
+    }
+    infile.close();
 }
