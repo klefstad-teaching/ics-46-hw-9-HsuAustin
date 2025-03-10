@@ -21,10 +21,10 @@ bool edit_distance_within(const string& str1, const string& str2, int d) {
         for (int i = 0; i < len1; i++) {
             if (str1[i] != str2[i]) {
                 diffCount++;
-                if (diffCount > 1) {return false;}
+                if (diffCount > d) {return false;}
             }
         }
-        return (diffCount == 1);
+        return true;
     }
     const string& shorter = (len1 < len2) ? str1 : str2;
     const string& longer  = (len1 < len2) ? str2 : str1;
@@ -36,12 +36,12 @@ bool edit_distance_within(const string& str1, const string& str2, int d) {
             j++;
         } else {
             mismatchCount++;
-            if (mismatchCount > 1) {return false;}
+            if (mismatchCount > d) {return false;}
             j++;
         }
     }
-    if (j < (int)longer.size()) {mismatchCount++;}
-    return (mismatchCount == 1);
+    if (j < (int)longer.size()) {mismatchCount += (longer.size() - j);}
+    return (mismatchCount <= d);
 }
 
 bool is_adjacent(const string& word1, const string& word2) {
