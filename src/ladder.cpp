@@ -57,16 +57,17 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     while (!ladder_queue.empty()) {
         vector<string> ladder = ladder_queue.front();
         ladder_queue.pop();
-        const string& last_word = ladder.back();
-        for (auto &w : word_list) {
-            if (w == last_word) {continue;}
-            if (visited.find(w) == visited.end()) {
-                if (is_adjacent(last_word, w)) {
+        const string &last_word = ladder.back();
+        for (auto &word: word_list) {
+            if (abs((int)word.size() - (int)last_word.size()) > 1) {continue;}
+            if (word == last_word) {continue;}
+            if (visited.find(word) == visited.end()) {
+                if (is_adjacent(last_word, word)) {
                     vector<string> new_ladder = ladder;
-                    new_ladder.push_back(w);
-                    if (w == end_word) {return new_ladder;}
+                    new_ladder.push_back(word);
+                    if (word == end_word) {return new_ladder;}
                     ladder_queue.push(new_ladder);
-                    visited.insert(w);
+                    visited.insert(word);
                 }
             }
         }
