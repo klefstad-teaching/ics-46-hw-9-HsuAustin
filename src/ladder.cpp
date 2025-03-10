@@ -59,6 +59,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         ladder_queue.pop();
         const string& last_word = ladder.back();
         for (auto &w : word_list) {
+            if (w == last_word) {continue;}
             if (visited.find(w) == visited.end()) {
                 if (is_adjacent(last_word, w)) {
                     vector<string> new_ladder = ladder;
