@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
     set<string> word_list;
-    try {load_words(word_list, "words.txt");} 
+    try {load_words(word_list, "src/words.txt");} 
     catch (exception& e) {
         cerr << "Error loading words: " << e.what() << endl;
         return 1;
